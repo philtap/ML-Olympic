@@ -193,7 +193,7 @@ athleteTable$EntryName = ifelse(athleteTable$EventType == "Team", athleteTable$T
 # Used for the DIA project
 ########################################################################
 
-write.csv(athleteTable,"summer_athletes.csv", row.names = FALSE)
+write.csv(athleteTable,"summer_athletes_wquotes.csv", row.names = FALSE)
 
 #########################################################################
 # Aggregation 
