@@ -191,6 +191,7 @@ athleteTable$EntryName = ifelse(athleteTable$EventType == "Team", athleteTable$T
 ########################################################################
 # Save to clean transformed data to a csv file
 # Used for the DIA project
+# Note: file is saved with quotes for now and can be edited manually in Notepad ++ to remove the quotes.
 ########################################################################
 
 write.csv(athleteTable,"summer_athletes_wquotes.csv", row.names = FALSE)
