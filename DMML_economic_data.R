@@ -23,7 +23,10 @@
 #----------------------------------------------------------------------
 # rgdpna	Real GDP at constant 2011 national prices (in mil. 2011US$)
 
+#################################
 # Load required libraries 
+#################################
+
 library(stringr)
 library(Amelia)
 library(dplyr)
@@ -34,87 +37,29 @@ setwd("C:/Users/philippet/OneDrive - Datalex/NCIRL/Modules/Data mining and Machi
 # Read the initial csv file and put it in a data.frame.
 csvData <- read.csv("pwt91.csv", header=T, na.strings=c(""), stringsAsFactors = F)
 
-economicData = csvData [ csvData$year >= 1988, c('countrycode', 'country','year'	,'rgdpe', 'pop',	'emp',  'rgdpna')]
+# Keep only the relavnt columns and only the rows since 1988
+# A lot of data is missing before 1988
+economicData = csvData [ csvData$year >= 1988, c('countrycode', 'country', 'year','rgdpe', 'pop',	'emp')]
 
+# Examine the data set 
 attach(economicData)
 summary(economicData)
 str(economicData)
 
 
-
-
-################################################################
-#   Missing values
-###############################################################
-
-missmap(economicData, main = "Missing values vs observed")
-
-# NA values per column
-sapply(economicData,function(x) sum(is.na(x)))
-
-rgdpe_na = economicData [ is.na(rgdpe), ]
-
-rgdpe_na_counts = table(rgdpe_na$country)
-
-rgdpe_na_counts
-
-
-# From 1988
-# Armenia                Azerbaijan                   Belarus    Bosnia and Herzegovina 
-# 2                         2                         2                         2 
-# Croatia                   Curaçao            Czech Republic                   Estonia 
-# 2                        17                         2                         2 
-# Georgia                Kazakhstan                Kyrgyzstan                    Latvia 
-# 2                         2                         2                         2 
-# Lithuania                Montenegro           North Macedonia       Republic of Moldova 
-# 2                         2                         2                         2 
-# Russian Federation                    Serbia Sint Maarten (Dutch part)                  Slovakia 
-# 2                         2                        17                         2 
-# Slovenia                Tajikistan              Turkmenistan                   Ukraine 
-# 2                         2                         2                         2 
-# Uzbekistan                     Yemen 
-# 2                         1 
-
-
-
-# From 1990 only 2 exotic countries  
-# Curaçao Sint Maarten (Dutch part) 
-# 15                        15 
-
-barplot(rgdpe_na_counts, main = "NAs per Year", xlab = "Year" , ylab = "Count")
-
-emp_na = economicData [ is.na(emp), ]
-table(emp_na$year)
-
-table(emp_na$country)
-# only exotic countries 
-
-# Anguilla       Antigua and Barbuda                     Aruba                   Bermuda 
-# 15                        19                         1                        10 
-# British Virgin Islands            Cayman Islands                   Curaçao                  Dominica 
-# 27                        10                        21                        16 
-# Montserrat     Saint Kitts and Nevis                Seychelles Sint Maarten (Dutch part) 
-# 28                        28                         2                        28 
-# Turks and Caicos Islands 
-# 21 
-################################################################
-#   Missing values - end
-################################################################
-
-
 # Keep economic data only for pre-olympic years e.g 2011, 2015...
 economicOlympicData = economicData [ (year %% 4) == 3 , ]
 
-
-# Add an OlympicYear column for the corresponding Olympic year e.f 2012, 2016 ...
+# Add an OlympicYear column for the corresponding Olympic year e.g. 2012, 2016 ...
 economicOlympicData$OlympicYear = economicOlympicData$year + 1
 
-# Add a gdppc column for the GDP per capita
+# Add a GDPpC column for the GDP per capita
 economicOlympicData$GDPpC = economicOlympicData$rgdpe / economicOlympicData$pop
 
-# Add an emprate column for the employment rate
+# Add an EmpRate column for the employment rate
 economicOlympicData$EmpRate = economicOlympicData$emp / economicOlympicData$pop
 
+# Rename the columns
 names(economicOlympicData)[names(economicOlympicData) == "countrycode"] <- "ISOCode"
 names(economicOlympicData)[names(economicOlympicData) == "country"] <- "Country"
 names(economicOlympicData)[names(economicOlympicData) == "pop"] <- "Population"
@@ -126,10 +71,120 @@ col_order = c("OlympicYear", "ISOCode", "Country", "Population" , "GDPpC" , "Emp
 
 economicOlympicData <- as.data.frame(economicOlympicData) [, col_order]
 
+attach(economicOlympicData)
+
+################################################################
+# Remove ',' in the country names
+################################################################
+
+subset(economicOlympicData , grepl(",", economicOlympicData$Country) )
+
+# Remove all ',' in Name, Team, Event, 
+economicOlympicData$Country<- str_remove_all(economicOlympicData$Country, ",")
+
+
+################################################################
+#   Missing values
+################################################################
+
+#------------------------------
+# OVERALL MISSING VALUES
+#------------------------------
+
+missmap(economicOlympicData, main = "Missing values vs observed")
+
+# NA values per column
+sapply(economicOlympicData,function(x) sum(is.na(x)))
+
+#------------------------------
+#  Missing population 
+#------------------------------
+
+pop_na = economicOlympicData [ is.na(Population), c("OlympicYear", "ISOCode", "Country","Population")]
+pop_na
+# OlympicYear ISOCode                   Country Population
+# 2898         1992     CUW                   Curaçao         NA
+# 2902         1996     CUW                   Curaçao         NA
+# 2906         2000     CUW                   Curaçao         NA
+# 2910         2004     CUW                   Curaçao         NA
+# 10582        1992     SXM Sint Maarten (Dutch part)         NA
+# 10586        1996     SXM Sint Maarten (Dutch part)         NA
+# 10590        2000     SXM Sint Maarten (Dutch part)         NA
+# 10594        2004     SXM Sint Maarten (Dutch part)         NA
+
+# Neither of these countries are Olympic Nations - so no action
+
+#------------------------------
+#  Missing rgdpe
+#------------------------------
+
+rgdpe_na = economicOlympicData [ is.na(GDPpC), c("OlympicYear", "ISOCode", "Country","Population")]
+rgdpe_na
+#          OlympicYear ISOCode                Country  Population
+# 2898         1992     CUW                   Curaçao         NA
+# 2902         1996     CUW                   Curaçao         NA
+# 2906         2000     CUW                   Curaçao         NA
+# 2910         2004     CUW                   Curaçao         NA
+# 10582        1992     SXM Sint Maarten (Dutch part)         NA
+# 10586        1996     SXM Sint Maarten (Dutch part)         NA
+# 10590        2000     SXM Sint Maarten (Dutch part)         NA
+# 10594        2004     SXM Sint Maarten (Dutch part)         NA
+
+# Neither of these countries are Olympic Nations - so no action
+
+#-------------------------------------------------------
+#  Missing EmpRate - Actually ignore emp and empRate
+#-------------------------------------------------------
+emp_na = economicOlympicData [ is.na(EmpRate), ]
+
+emp_na
+
+emp_na_counts = table(emp_na$OlympicYear)
+emp_na_counts
+
+# 1992 1996 2000 2004 2008 2012 2016 
+# 6    7    7    7    7   10   10 
+
+barplot(emp_na_counts, main = "NAs per Year (emp)", xlab = "Year" , ylab = "Count")
+
+emp_na_counts = table(emp_na$Country)
+emp_na_counts
+
+# only exotic countries 
+
+# Anguilla       Antigua and Barbuda                   Bermuda    British Virgin Islands            Cayman Islands 
+# 4                         4                         2                         6                         2 
+# Curaçao                  Dominica                Montserrat     Saint Kitts and Nevis                Seychelles 
+# 5                         4                         7                         7                         1 
+# Sint Maarten (Dutch part)  Turks and Caicos Islands 
+# 7                         5 
+
+# ATG  Antigua and Barbuda IOC =  ANT	
+# DMA Dominica   IOC =  DMA	 Dominica
+# BMU Bermuda  IOC = BER	
+# VGB British Virgin Islands  IOC = IVB	
+# KNA  Saint Kitts and Nevis IOC = SKN 	 
+# CYM Cayman Islands IOC = CAY	 
+# SYC Seychelles IOC = SEY	
+
+sapply(economicOlympicData,function(x) sum(is.na(x))) 
+################################################################
+#   Missing values - end
+################################################################
+
+###############################################################
+#  Remove EmpRate column
+#  Decided not to use it in the study as too many missing values
+###############################################################
+
+col_order = c("OlympicYear", "ISOCode", "Country", "Population" , "GDPpC" )
+
+economicOlympicData <- as.data.frame(economicOlympicData) [, col_order]
+
 ##################################################################
 # This is the final version of the economicOlympicData data set
 ##################################################################
 
-write.csv(economicOlympicData,"economic_table.csv", row.names = FALSE)
+write.csv(economicOlympicData,"economic_table.csv", row.names = FALSE, quote=FALSE)
 
 

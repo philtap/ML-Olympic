@@ -1,5 +1,6 @@
 #-----------------------------------------------------------------------
-#                 DIA / DMML_project_athletes.R
+#                 DIA project 
+#           DMML_project_athletes.R
 #-----------------------------------------------------------------------
 # This script deals with the ETL of the athlete_events.csv Olympic athletes file
 
@@ -19,7 +20,6 @@ getwd()
 
 setwd("C:/Users/philippet/OneDrive - Datalex/NCIRL/Modules/Data mining and Machine learning I/Project/Datasets/")
 
-getwd()
 
 # Note is 'fread' more efficient than read.csv
 
@@ -37,6 +37,9 @@ names(athleteData)
 # - Summer Olympics
 # - meaningful columns
 ####################################################################
+
+# If start with 1992 , 1984 is enough here to get previous 2 results 
+# If start with 1988 , 1980 is enough here to get previous 2 results 
 
 athleteSummerData = athleteData [athleteData$Season == 'Summer' & athleteData$Year >=  "1976" ,c("ID", "Name" ,"Sex", "Team","NOC","Year","Sport","Event","Medal" )]   
 summary(athleteSummerData)
@@ -63,27 +66,24 @@ str(athleteSummerData)
 #                  DATA CLEANUP 
 ########################################################################
 
-# NA values per column
+###################################################################
+# First, investigate any NA values 
+##################################################################
+
+# No NA values per column
 sapply(athleteSummerData,function(x) sum(is.na(x)))
 
 # Double check this - Medal = NA for athletes without medal
 athleteSummerData[is.na(athleteSummerData$Medal), ]
 
-
-
 # Missing values vs observed 
 missmap(athleteSummerData, main = "Missing values vs observed")
 
-
-###################################################################
+#
 # IMPORTANT : The medal data is not NA is R but "NA" 
-# So is.na FUNCTION DOES NOT WORK
-##################################################################
+# So is.na functions , see above, do not return data 
 
-colSums(is.na(athleteSummerData))
-# ID  Name   Sex  Team   Country  Year Sport Event Medal 
-# 0     0     0     0     0     0     0     0     0
-
+# No 'NA' in most columns
 sum( athleteSummerData$Name == 'NA')
 sum (athleteSummerData$Sex == 'NA')
 sum( athleteSummerData$Team == 'NA')
@@ -92,18 +92,18 @@ sum (athleteSummerData$Year == 'NA')
 sum (athleteSummerData$Sport == 'NA')
 sum( athleteSummerData$Event == 'NA')
 
-# [1] 0 for all
-
+# As expected, 'NA' is a value for medal, meaning the athlete did not get a medal 
+# No action needed
 sum (athleteSummerData$Medal == 'NA')
-# [1] 188464
 
 
 ###################################################################
-# IMPORTANT : Ensure no ',' in the columns
+# IMPORTANT : Ensure no ',' inside the columns
 ##################################################################
 
 grep (',' , athleteSummerData$Name )
 
+# Find ',' in each of the columns
 subset(athleteSummerData , grepl(",", athleteSummerData$Name) ) 
 subset(athleteSummerData , grepl(",", athleteSummerData$Sex) )
 subset(athleteSummerData , grepl(",", athleteSummerData$Team) ) 
@@ -122,16 +122,11 @@ athleteSummerData$Event<- str_remove_all(athleteSummerData$Event, ",")
 # Order and Save the data frame 
 ###################################################################
 
-
 # Order the data frame
 
 athleteSummerData = athleteSummerData[with (athleteSummerData, order (Year,Sport,Event,Medal,Country) ),]
 
-#athleteSummerData <- str_replace_all(athleteSummerData$Medal, "NA", "")
-
 athleteSummerData
-
-
 
 
 ########################################################################################
@@ -142,14 +137,16 @@ athleteSummerData
 
 athleteTable <- as.data.table(athleteSummerData)
 
-athleteTable
 
-# categories_dt$type <- "Individual"
+# In order to count the unique entries and medals for a country, we need 
+# to determine if an athlete's entry in individual or part of a team entry
+# Lets's mark each row as Indvidual or Team based on the event 
 
+# Initialise all rows as Individual, we will overwrite this in case of a 
+# Team event 
 athleteTable$EventType <- "Individual"
 
-# Done after research on Wikipedia
-athleteTable$Event [athleteTable$Event %like% "Team" ] 
+# The following classification was established after research on Wikipedia
 
 athleteTable$EventType [athleteTable$Event %like% "Team" ] =  "Team"
 athleteTable$EventType [athleteTable$Event %like% "4 X" ] =  "Team"
@@ -179,10 +176,12 @@ athleteTable$EventType [athleteTable$Event %like% "Water Polo" ] = "Team"
 athleteTable$EventType [athleteTable$Event %like% "Rugby" ] = "Team"
 athleteTable$EventType [athleteTable$Event %like% "Softball" ] = "Team"
 
-
-# Add an Entry Name column
+# To help with count the unique entries and medals for a country,
+# let's add an Entry Name column
 #  - for individual events: name of the athlete
-#  - for teams : the team name e.g France , France 1, France 2
+#  - for teams : the team name
+#         - the country name: France
+#         - in case of multiple enties for an event: France 1, France 2
 
 athleteTable$EntryName <- "NA"
 
@@ -194,7 +193,7 @@ athleteTable$EntryName = ifelse(athleteTable$EventType == "Team", athleteTable$T
 # Note: file is saved with quotes for now and can be edited manually in Notepad ++ to remove the quotes.
 ########################################################################
 
-write.csv(athleteTable,"summer_athletes_wquotes.csv", row.names = FALSE)
+write.csv(athleteTable,"summer_athletes_wquotes.csv", row.names = FALSE, quote=FALSE)
 
 #########################################################################
 # Aggregation 
@@ -326,10 +325,11 @@ col_order <- c("Year","CountryCode", "ISOCode", "TotalEntries" ,"GoldMedals"  , 
 medalTable <- as.data.frame(medalTable) [, col_order]
 
 
+
 ##################################################################
 # This is the final version of the entry/medal table
 # Save as csv
 ##################################################################
 
-write.csv(medalTable,"summer_entry_table.csv", row.names = FALSE)
+write.csv(medalTable,"summer_entry_table.csv", row.names = FALSE, quote=FALSE)
 

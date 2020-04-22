@@ -2,7 +2,7 @@
 #                 DMML_project_medals.R
 #-----------------------------------------------------------------------
 # This script deals with the ETL of the summer.csv Olympic medal file
-#
+
 # TO DO : Add details
 #
 
@@ -205,7 +205,7 @@ sapply(medalData,function(x) sum(is.na(x)))
 medalData[is.na(medalData$Country), ]
 medalData [medalData$Athlete == 'Pending', ]
 
-write.csv(medalData,"summer_clean.csv", row.names = FALSE)
+write.csv(medalData,"summer_clean.csv", row.names = FALSE, quote=FALSE)
 
 
 ########################################################################
@@ -381,7 +381,7 @@ sapply(medalData,function(x) sum(is.na(x)))
 # This is the final clean version of medal data frame . Save it
 ##################################################################
 
-write.csv(medalData,"summer_medals_wquotes.csv", row.names = FALSE)
+write.csv(medalData,"summer_medals_wquotes.csv", row.names = FALSE, quote=FALSE)
 
 
 ########################################################################################
@@ -467,7 +467,7 @@ medalTable
 
 
 # Save to csv  - DONE
-write.csv(medalTable,"summer_medal_table.csv", row.names = FALSE)
+write.csv(medalTable,"summer_medal_table.csv", row.names = FALSE, quote=FALSE)
 
 # To convert tables back to data frame
 # totalMedalData = as.data.frame (totalTable)
