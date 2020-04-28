@@ -304,7 +304,7 @@ olympicData = olympicData [olympicData$Year >=1992 ,   ]
 ###############################################################################################
 
 # Missing values vs observed 
-# missmap(olympicData, main = "Missing values vs observed")
+ missmap(olympicData, main = "Missing values vs observed")
 
 #missing values
 sapply(olympicData,function(x) sum(is.na(x)))
@@ -377,7 +377,7 @@ olympicData  <- as.data.frame(olympicData ) [, col_order]
 
 
 # Missing values vs observed 
-#missmap(olympicData, main = "Missing values vs observed")
+missmap(olympicData, main = "Missing values vs observed")
 
 
 ##################################################################

@@ -733,7 +733,7 @@ write.csv(olympicData2020Predictions,"Graphs/ALL_predictions.csv", row.names = F
 
 
 top_20_AllRf2 = olympicData2020Predictions[order(olympicData2020Predictions$predictions2020AllRf2, decreasing= T),]
-top_20_AllRf2 = x[1:20,]
+top_20_AllRf2 = top_20_AllRf2[1:20,]
 
 col_order <- c("Year", "CountryCode",
                "predictions2020AllRf2") 

@@ -95,7 +95,7 @@ economicOlympicData$Country<- str_remove_all(economicOlympicData$Country, ",")
 # OVERALL MISSING VALUES
 #------------------------------
 
-#missmap(economicOlympicData, main = "Missing values vs observed")
+missmap(economicOlympicData, main = "Missing values vs observed")
 
 # NA values per column
 sapply(economicOlympicData,function(x) sum(is.na(x)))

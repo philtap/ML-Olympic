@@ -80,7 +80,7 @@ sapply(athleteSummerData,function(x) sum(is.na(x)))
 athleteSummerData[is.na(athleteSummerData$Medal), ]
 
 # Missing values vs observed 
-#missmap(athleteSummerData, main = "Missing values vs observed")
+missmap(athleteSummerData, main = "Missing values vs observed")
 
 #
 # IMPORTANT : The medal data is not NA is R but "NA" 
