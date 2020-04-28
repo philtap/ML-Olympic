@@ -1,0 +1,230 @@
+Country,IOC,ISO
+Afghanistan,AFG,AFG
+Albania,ALB,ALB
+Algeria,ALG,DZA
+Andorra,AND,AND
+Angola,ANG,AGO
+Antigua and Barbuda,ANT,ATG
+Argentina,ARG,ARG
+Armenia,ARM,ARM
+Aruba,ARU,ABW
+American Samoa,ASA,ASM
+Australia,AUS,AUS
+Austria,AUT,AUT
+Azerbaijan,AZE,AZE
+The Bahamas,BAH,BHS
+Bangladesh,BAN,BGD
+Barbados,BAR,BRB
+Burundi,BDI,BDI
+Belgium,BEL,BEL
+Benin,BEN,BEN
+Bermuda,BER,BMU
+Bhutan,BHU,BTN
+Bosnia and Herzegovina,BIH,BIH
+Belize,BIZ,BLZ
+Belarus,BLR,BLR
+Bolivia,BOL,BOL
+Botswana,BOT,BWA
+Brazil,BRA,BRA
+Bahrain,BRN,BHR
+Brunei,BRU,BRN
+Bulgaria,BUL,BGR
+Burkina Faso,BUR,BFA
+Central African Republic,CAF,CAF
+Cambodia,CAM,KHM
+Canada,CAN,CAN
+Cayman Islands,CAY,CYM
+"Congo, Republic of the",CGO,COG
+Chad,CHA,TCD
+Chile,CHI,CHL
+"China, People's Republic of",CHN,CHN
+Côte d'Ivoire,CIV,CIV
+Cameroon,CMR,CMR
+"Congo, Democratic Republic of the",COD,COD
+Cook Islands,COK,COK
+Colombia,COL,COL
+Comoros,COM,COM
+Cape Verde,CPV,CPV
+Costa Rica,CRC,CRI
+Croatia,CRO,HRV
+Cuba,CUB,CUB
+Cyprus,CYP,CYP
+Czech Republic,CZE,CZE
+Denmark,DEN,DNK
+Djibouti,DJI,DJI
+Dominica,DMA,DMA
+Dominican Republic,DOM,DOM
+Ecuador,ECU,ECU
+Egypt,EGY,EGY
+Eritrea,ERI,ERI
+El Salvador,ESA,SLV
+Spain,ESP,ESP
+Estonia,EST,EST
+Ethiopia,ETH,ETH
+Fiji,FIJ,FJI
+Finland,FIN,FIN
+France,FRA,FRA
+"Micronesia, Federated States of",FSM,FSM
+Gabon,GAB,GAB
+The Gambia,GAM,GMB
+United Kingdom,GBR,GBR
+Guinea-Bissau,GBS,GNB
+Georgia,GEO,GEO
+Equatorial Guinea,GEQ,GNQ
+Germany,GER,DEU
+Ghana,GHA,GHA
+Greece,GRE,GRC
+Grenada,GRN,GRD
+Guatemala,GUA,GTM
+Guinea,GUI,GIN
+Guam,GUM,GUM
+Guyana,GUY,GUY
+Haiti,HAI,HTI
+Hong Kong,HKG,HKG
+Honduras,HON,HND
+Hungary,HUN,HUN
+Indonesia,INA,IDN
+India,IND,IND
+Iran,IRI,IRN
+Ireland,IRL,IRL
+Iraq,IRQ,IRQ
+Iceland,ISL,ISL
+Israel,ISR,ISR
+United States Virgin Islands,ISV,VIR
+Italy,ITA,ITA
+British Virgin Islands,IVB,VGB
+Jamaica,JAM,JAM
+Jordan,JOR,JOR
+Japan,JPN,JPN
+Kazakhstan,KAZ,KAZ
+Kenya,KEN,KEN
+Kyrgyzstan,KGZ,KGZ
+Kiribati,KIR,KIR
+"Korea, Republic of (South)",KOR,KOR
+Kosovo,KOS,[12]
+Saudi Arabia,KSA,SAU
+Kuwait,KUW,KWT
+Laos,LAO,LAO
+Latvia,LAT,LVA
+Libya,LBA,LBY
+Lebanon,LBN,LBN
+Liberia,LBR,LBR
+Saint Lucia,LCA,LCA
+Lesotho,LES,LSO
+Liechtenstein,LIE,LIE
+Lithuania,LTU,LTU
+Luxembourg,LUX,LUX
+Madagascar,MAD,MDG
+Morocco,MAR,MAR
+Malaysia,MAS,MYS
+Malawi,MAW,MWI
+Moldova,MDA,MDA
+Maldives,MDV,MDV
+Mexico,MEX,MEX
+Mongolia,MGL,MNG
+Marshall Islands,MHL,MHL
+North Macedonia,MKD,MKD
+Mali,MLI,MLI
+Malta,MLT,MLT
+Montenegro,MNE,MNE
+Monaco,MON,MCO
+Mozambique,MOZ,MOZ
+Mauritius,MRI,MUS
+Mauritania,MTN,MRT
+Myanmar,MYA,MMR
+Namibia,NAM,NAM
+Nicaragua,NCA,NIC
+Netherlands,NED,NLD
+Nepal,NEP,NPL
+Nigeria,NGR,NGA
+Niger,NIG,NER
+Norway,NOR,NOR
+Nauru,NRU,NRU
+New Zealand,NZL,NZL
+Oman,OMA,OMN
+Pakistan,PAK,PAK
+Panama,PAN,PAN
+Paraguay,PAR,PRY
+Peru,PER,PER
+Philippines,PHI,PHL
+State of Palestine,PLE,PSE
+Palau,PLW,PLW
+Papua New Guinea,PNG,PNG
+Poland,POL,POL
+Portugal,POR,PRT
+"Korea, Democratic People's Rep. (North)",PRK,PRK
+Puerto Rico,PUR,PRI
+Qatar,QAT,QAT
+Romania,ROU,ROU
+South Africa,RSA,ZAF
+Russian Federation,RUS,RUS
+Rwanda,RWA,RWA
+Samoa,SAM,WSM
+Senegal,SEN,SEN
+Seychelles,SEY,SYC
+Singapore,SGP,SGP
+Saint Kitts and Nevis,SKN,KNA
+Sierra Leone,SLE,SLE
+Slovenia,SLO,SVN
+San Marino,SMR,SMR
+Solomon Islands,SOL,SLB
+Somalia,SOM,SOM
+Serbia,SRB,SRB
+Sri Lanka,SRI,LKA
+South Sudan,SSD,SSD
+São Tomé and Príncipe,STP,STP
+Sudan,SUD,SDN
+Switzerland,SUI,CHE
+Suriname,SUR,SUR
+Slovakia,SVK,SVK
+Sweden,SWE,SWE
+Eswatini,SWZ,SWZ
+Syria,SYR,SYR
+Tanzania,TAN,TZA
+Tonga,TGA,TON
+Thailand,THA,THA
+Tajikistan,TJK,TJK
+Turkmenistan,TKM,TKM
+Timor-Leste,TLS,TLS
+Togo,TOG,TGO
+Taiwan,TPE,TWN
+Trinidad and Tobago,TTO,TTO
+Tunisia,TUN,TUN
+Turkey,TUR,TUR
+Tuvalu,TUV,TUV
+United Arab Emirates,UAE,ARE
+Uganda,UGA,UGA
+Ukraine,UKR,UKR
+Uruguay,URU,URY
+United States,USA,USA
+Uzbekistan,UZB,UZB
+Vanuatu,VAN,VUT
+Venezuela,VEN,VEN
+Vietnam,VIE,VNM
+Saint Vincent and the Grenadines,VIN,VCT
+Yemen,YEM,YEM
+Zambia,ZAM,ZMB
+Zimbabwe,ZIM,ZWE
+British Honduras,HBR,
+Burma,BIR,BUR
+Ceylon,CEY,
+Dahomey,DAH,DHY
+Czechoslovakia,TCH,CSK
+East Germany,GDR,DDR
+Khmer Republic,KHM,
+Malaya,MAL,
+Netherlands Antilles,AHO,ANT
+North Borneo,NBO,
+North Yemen,YAR,YEM
+Northern Rhodesia,NRH,
+Rhodesia,RHO,RHO
+Serbia and Montenegro,SCG,SCG
+South Yemen,YMD,YMD
+Soviet Union,URS,SUN
+Upper Volta,VOL,HVO
+"Viet-Nam, Democratic Republic of",,VDR
+"Viet Nam, Republic of",VNM,VNM
+West Germany,FRG,DEU
+"Yugoslavia, Federal Republic of",YUG,YUG
+"Yugoslavia, Socialist Federal Republic of",YUG,YUG
+Zaire,ZAI,ZAR
